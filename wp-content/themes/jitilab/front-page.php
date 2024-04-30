@@ -17,7 +17,7 @@
  
   <!-- Main -->
   <main id="jtlMain" class="jtl-bg-white">
-    <!-- Silent is gold   -->
+    <!-- Silent is gold -->
   </main>
  
 <?php

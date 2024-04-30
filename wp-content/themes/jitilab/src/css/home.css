@@ -15,69 +15,233 @@ html, body {
   @apply jtl-container jtl-max-w-screen-xl jtl-mx-auto;
 }
 
-/* Nav: Topbar */
-  /* Search Form */
-  .jtl-search-form {
-    @apply jtl-flex jtl-flex-row jtl-items-center;
+/* Header */
+.jtl-header-sticky {
+  @apply jtl-sticky jtl-top-0 jtl-bg-white jtl-z-10 -jtl-translate-y-[100px] -jtl-mt-[61px] lg:-jtl-mt-[81px] jtl-transition-all jtl-duration-300;
 
+  &.active {
+    @apply jtl-translate-y-0 jtl-mt-0;
+  }
+}
+
+/* Nav: Topbar */
+/* Search Form */
+.jtl-search-form {
+  @apply jtl-flex jtl-flex-row jtl-items-center;
+
+  .jtl-search-input {
+    @apply jtl-bg-jtllight/10 jtl-py-2 jtl-px-4 jtl-pr-12 jtl-outline-none jtl-text-jtllight focus:jtl-bg-jtllight/0 jtl-border-[1px] jtl-border-jtllight/20 jtl-rounded jtl-text-base;
+  }
+
+  .jtl-search-button {
+    @apply -jtl-ml-[32px];
+
+    .jtl-search-icon {
+      @apply jtl-text-jtllight/50 hover:jtl-text-jtllight;
+    }
+  }
+
+  &.light {
     .jtl-search-input {
-      @apply jtl-bg-jtllight/10 jtl-py-2 jtl-px-4 jtl-pr-[48px] jtl-outline-none jtl-text-jtllight focus:jtl-bg-jtllight/0 jtl-border-[1px] jtl-border-jtllight/20 jtl-rounded jtl-text-base;
+      @apply jtl-bg-jtldark/10 jtl-text-jtldark focus:jtl-bg-jtldark/0 jtl-border-jtldark/20;
     }
 
     .jtl-search-button {
-      @apply -jtl-ml-[32px];
-
       .jtl-search-icon {
-        @apply jtl-text-jtllight/50 hover:jtl-text-jtllight;
+        @apply jtl-text-jtldark/50 hover:jtl-text-jtldark;
       }
     }
   }
 
-  /* Contact Nav */
-  .jtl-contact-nav {
-    ul {
-      @apply jtl-flex jtl-flex-row jtl-items-center jtl-gap-8;
+  &.dropdown {
+    .jtl-search-input {
+      @apply jtl-bg-jtldark/0 jtl-text-jtlprimary focus:jtl-bg-jtldark/0 jtl-border-jtldark/20;
+    }
 
-      li {
-        a {
-          @apply jtl-flex jtl-flex-row jtl-items-center jtl-gap-2;
+    .jtl-search-button {
+      .jtl-search-icon {
+        @apply jtl-text-jtlprimary/50 hover:jtl-text-jtlprimary;
+      }
+    }
+  }
+}
 
+/* Contact Nav */
+.jtl-contact-nav {
+  ul {
+    @apply jtl-flex jtl-flex-row jtl-items-center jtl-gap-8;
+
+    li {
+      a {
+        @apply jtl-flex jtl-flex-row jtl-items-center jtl-gap-2;
+
+        .jtl-icon,
+        .jtl-text {
+          @apply jtl-text-jtllight;
+        }
+
+        &:hover {
           .jtl-icon,
           .jtl-text {
-            @apply jtl-text-jtllight;
+            @apply jtl-text-jtlsecondary;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Socmed Nav */
+.jtl-socmed-nav {
+  ul {
+    @apply jtl-flex jtl-flex-row jtl-items-center jtl-gap-4;
+
+    li {
+      a {
+        .jtl-icon {
+          @apply jtl-text-jtllight;
+        }
+
+        &:hover {
+          .jtl-icon {
+            @apply jtl-text-jtlsecondary;
+          } 
+        }
+      }
+    }
+  }
+}
+
+/* Nav: Menu */
+/* Logo */
+.jtl-logo {
+  @apply jtl-w-auto jtl-h-9;
+}
+
+/* Menu Nav */
+.jtl-menu-nav {
+  > ul {
+    @apply jtl-flex jtl-flex-row jtl-items-center jtl-gap-8;
+
+    > li {
+      @apply jtl-relative;
+
+      > a {
+        @apply jtl-inline-block lg:jtl-flex jtl-flex-row jtl-items-center jtl-gap-2 jtl-py-0 lg:jtl-py-4;
+
+        .jtl-text {
+          @apply jtl-text-jtlprimary jtl-font-semibold jtl-line-clamp-1;
+        }
+
+        .jtl-icon {
+          @apply jtl-text-jtlprimary;
+        }
+
+        &:hover {
+          .jtl-icon,
+          .jtl-text {
+            @apply jtl-text-jtlsecondary;
           }
 
-          &:hover {
-            .jtl-icon,
+          + .jtl-submenu-wrap {
+            @apply jtl-block;
+          }
+        }
+      }
+    }
+  }
+
+  /* Submenu */
+  .jtl-submenu-wrap {
+    @apply jtl-hidden hover:jtl-block jtl-absolute jtl-top-12 jtl-left-0 jtl-w-56 jtl-bg-white jtl-rounded jtl-shadow jtl-border-[1px] jtl-border-slate-100 jtl-border-t-2 jtl-border-t-jtlsecondary;
+
+    /* Submenu Nav */
+    .jtl-submenu-nav {
+      > ul {
+        @apply jtl-flex jtl-flex-col;
+
+        > li {
+          @apply jtl-border-b-[1px] jtl-border-b-slate-100;
+
+          > a {
+            @apply jtl-px-4 jtl-py-2 jtl-block;
+
             .jtl-text {
-              @apply jtl-text-jtlsecondary;
+              @apply jtl-text-jtlprimary jtl-font-semibold jtl-line-clamp-1;
+            }
+
+            &:hover {
+              .jtl-text {
+                @apply jtl-text-jtlsecondary;
+              }
             }
           }
+
+          &:last-child {
+            @apply jtl-border-b-0;
+          }
         }
       }
     }
   }
+}
 
-  /* Socmed Nav */
-  .jtl-socmed-nav {
-    ul {
-      @apply jtl-flex jtl-flex-row jtl-items-center jtl-gap-4;
+/* Dropdown nav */
+.jtl-dropdown-nav {
+  @apply jtl-hidden jtl-absolute jtl-top-[61px] jtl-w-full jtl-px-4 jtl-py-2 jtl-bg-white jtl-rounded jtl-shadow jtl-border-[1px] jtl-border-slate-100 jtl-border-b-2 jtl-border-b-jtlsecondary jtl-z-[9];
 
-      li {
-        a {
+  ul {
+    @apply jtl-overflow-y-auto;
+
+    > li {
+      @apply jtl-overflow-hidden jtl-border-b-[1px] jtl-border-b-slate-100;
+
+      > a {
+        @apply jtl-flex jtl-flex-row jtl-gap-4 jtl-justify-between jtl-items-center jtl-py-2;
+
+        .jtl-text {
+          @apply jtl-text-jtlprimary jtl-font-semibold jtl-line-clamp-1;
+        }
+
+        .jtl-icon {
+          @apply jtl-text-jtlprimary;
+        }
+      }
+
+      > ul {
+        @apply jtl-h-0;
+
+        > li {
+          @apply jtl-pl-4;
+        }
+      }
+
+      &:last-child {
+        @apply jtl-border-b-0;
+      }
+
+      &.active {
+        > a {
+          .jtl-text {
+            @apply jtl-text-jtlsecondary;
+          }
+
           .jtl-icon {
-            @apply jtl-text-jtllight;
+            @apply jtl-text-jtlsecondary jtl-rotate-180;
           }
+        }
 
-          &:hover {
-            .jtl-icon {
-              @apply jtl-text-jtlsecondary;
-            } 
-          }
+        > ul {
+          @apply jtl-h-auto;
         }
       }
     }
   }
+
+  &.active {
+    @apply jtl-block;
+  }
+}
 
 /* END: GLOBAL */
 /* ========================================================================================================================== */
