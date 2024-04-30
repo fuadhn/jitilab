@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================================================================================================== */
+/* GLOBAL */
+
+/* HTML, BODY */
+html, body {
+  @apply jtl-font-rubik jtl-text-jtldark jtl-font-normal;
+}
+
+/* Container */
+.jtl-custom-container {
+  @apply jtl-container jtl-max-w-screen-xl jtl-mx-auto;
+}
+
+/* END: GLOBAL */
+/* ========================================================================================================================== */

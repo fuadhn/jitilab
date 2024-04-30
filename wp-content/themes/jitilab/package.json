@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "home": "npx tailwindcss -i ./src/css/home.css -o ./dist/css/home.css --watch"
+  },
   "devDependencies": {
     "tailwindcss": "^3.4.3"
   }

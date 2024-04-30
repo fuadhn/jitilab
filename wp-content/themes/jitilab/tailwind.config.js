@@ -1,7 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   prefix: 'jtl-',
-  content: [],
+  content: [
+    // Home
+    "./functions.php",
+    "./header.php",
+    "./template-parts/header/header-primary.php",
+    "./front-page.php",
+    "./footer.php",
+    "./template-parts/footer/footer-primary.php",
+    "./src/css/home.css",
+    "./dist/js/main.js"
+  ],
   theme: {
     extend: {
       colors: {

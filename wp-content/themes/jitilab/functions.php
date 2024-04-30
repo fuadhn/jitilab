@@ -197,6 +197,39 @@ function jitilab_scripts() {
 	
 	// Styles
   wp_enqueue_style( 'jitilab-style', get_template_directory_uri() . '/style.css', array(), wp_get_theme()->get( 'Version' ) );
+
+	// Single post
+	if(is_singular('post') || is_singular('page')) {
+		// Styles
+
+		wp_deregister_style('wp-block-library');
+		wp_deregister_style('wp-block-library-theme-inline'); // no effect
+		wp_deregister_style('classic-theme-styles');
+		wp_deregister_style('global-styles-inline'); // no effect
+
+		// Font Awesome
+		wp_enqueue_style('jitilab-fa-style', get_template_directory_uri() . '/dist/fonts/fontawesome-free-6.5.2-web/css/fontawesome.min.css', array(), filemtime(get_template_directory() . '/dist/fonts/fontawesome-free-6.5.2-web/css/fontawesome.min.css'), 'all');
+		wp_enqueue_style('jitilab-fa-brands-style', get_template_directory_uri() . '/dist/fonts/fontawesome-free-6.5.2-web/css/brands.min.css', array(), filemtime(get_template_directory() . '/dist/fonts/fontawesome-free-6.5.2-web/css/brands.min.css'), 'all');
+		wp_enqueue_style('jitilab-fa-solid-style', get_template_directory_uri() . '/dist/fonts/fontawesome-free-6.5.2-web/css/solid.min.css', array(), filemtime(get_template_directory() . '/dist/fonts/fontawesome-free-6.5.2-web/css/solid.min.css'), 'all');
+
+		// Frontpage
+		if(is_home() || is_front_page()) {
+			// Main CSS
+			wp_enqueue_style('jitilab-home-style', get_template_directory_uri() . '/dist/css/home.css', array(), filemtime(get_template_directory() . '/dist/css/home.css'), 'all');
+
+			// Scripts
+		}
+	}
+
+	// Scripts
+	if(!is_admin()) {
+		wp_dequeue_script( 'jquery');
+    wp_deregister_script( 'jquery');
+
+		wp_enqueue_script( 'jitilab-jquery-js', get_template_directory_uri() . '/dist/js/jquery-3.7.1.min.js', array(), '3.7.1', true );
+	}
+
+	wp_enqueue_script( 'jitilab-main-js', get_template_directory_uri() . '/dist/js/main.js', array('jitilab-jquery-js'), filemtime(get_template_directory() . '/dist/js/main.js'), true );
 }
 add_action( 'wp_enqueue_scripts', 'jitilab_scripts' );
 
@@ -239,7 +272,7 @@ endif;
 // Add body class
 add_filter( 'body_class', 'jitilab_default_body_class' );
 function jitilab_default_body_class( $classes ) {
-	$classes[] = 'antialiased bg-body text-body font-body kwn-bg-white';
+	$classes[] = 'antialiased bg-body text-body font-body jtl-bg-white';
 
 	return $classes;
 }
@@ -419,9 +452,9 @@ if(!function_exists('jitilab_lazyload_img_the_content')) {
 			$img->removeAttribute('src');   
 			$img->setAttribute('data-image', $src);
 
-			// Get the class and add kwn-lazyload to the existing classes
+			// Get the class and add jtl-lazyload to the existing classes
 			$imgClass = $img->getAttribute('class');
-			$img->setAttribute('class', $imgClass . ' kwn-lazyload');
+			$img->setAttribute('class', $imgClass . ' jtl-lazyload');
 
 			// Let's create the <noscript> element and append our original
 			// tag, which we cloned earlier, as its child. Then, let's insert
