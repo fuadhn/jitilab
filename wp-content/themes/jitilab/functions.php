@@ -218,6 +218,7 @@ function jitilab_scripts() {
 			wp_enqueue_style('jitilab-home-style', get_template_directory_uri() . '/dist/css/home.css', array(), filemtime(get_template_directory() . '/dist/css/home.css'), 'all');
 
 			// Scripts
+			wp_enqueue_script( 'jitilab-home-js', get_template_directory_uri() . '/dist/js/home.js', array('jitilab-jquery-js', 'jitilab-main-js'), filemtime(get_template_directory() . '/dist/js/home.js'), true );
 		}
 	}
 

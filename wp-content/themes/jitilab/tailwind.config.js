@@ -10,7 +10,8 @@ module.exports = {
     "./footer.php",
     "./template-parts/footer/footer-primary.php",
     "./src/css/home.css",
-    "./dist/js/main.js"
+    "./dist/js/main.js",
+    "./dist/js/home.js"
   ],
   theme: {
     extend: {

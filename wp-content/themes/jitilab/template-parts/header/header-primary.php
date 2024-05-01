@@ -29,7 +29,7 @@ if($has_primary_menu) {
 }
 ?>
 
-<header id="jtlHeader">
+<header id="jtlHeader" class="jtl-relative jtl-z-[9]">
   <!-- Nav: Topbar -->
   <div id="jtlNavTopbar" class="jtl-bg-jtlprimary jtl-px-4 jtl-py-3 jtl-hidden lg:jtl-block">
     <div class="jtl-custom-container">

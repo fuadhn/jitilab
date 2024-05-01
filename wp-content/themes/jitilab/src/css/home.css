@@ -10,6 +10,22 @@ html, body {
   @apply jtl-font-rubik jtl-text-jtldark;
 }
 
+/* Animations */
+@keyframes kwn-sliding {
+  0%, 100% {
+    transform: translateX(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+.jtl-animate-sliding {
+  animation: kwn-sliding 1s infinite;
+}
+
 /* Container */
 .jtl-custom-container {
   @apply jtl-container jtl-max-w-screen-xl jtl-mx-auto;
@@ -17,7 +33,7 @@ html, body {
 
 /* Header */
 .jtl-header-sticky {
-  @apply jtl-sticky jtl-top-0 jtl-bg-white jtl-z-10 -jtl-translate-y-[100px] -jtl-mt-[61px] lg:-jtl-mt-[81px] jtl-transition-all jtl-duration-300;
+  @apply jtl-sticky jtl-top-0 jtl-bg-white jtl-z-10 -jtl-translate-y-[100px] -jtl-mt-[61px] lg:-jtl-mt-[81px] jtl-transition-all jtl-duration-200;
 
   &.active {
     @apply jtl-translate-y-0 jtl-mt-0;
@@ -130,7 +146,7 @@ html, body {
         @apply jtl-inline-block lg:jtl-flex jtl-flex-row jtl-items-center jtl-gap-2 jtl-py-0 lg:jtl-py-4;
 
         .jtl-text {
-          @apply jtl-text-jtlprimary jtl-font-semibold jtl-line-clamp-1;
+          @apply jtl-text-jtlprimary jtl-line-clamp-1;
         }
 
         .jtl-icon {
@@ -167,7 +183,7 @@ html, body {
             @apply jtl-px-4 jtl-py-2 jtl-block;
 
             .jtl-text {
-              @apply jtl-text-jtlprimary jtl-font-semibold jtl-line-clamp-1;
+              @apply jtl-text-jtlprimary jtl-line-clamp-1;
             }
 
             &:hover {
@@ -188,7 +204,7 @@ html, body {
 
 /* Dropdown nav */
 .jtl-dropdown-nav {
-  @apply jtl-hidden jtl-absolute jtl-top-[61px] jtl-w-full jtl-px-4 jtl-py-2 jtl-bg-white jtl-rounded jtl-shadow jtl-border-[1px] jtl-border-slate-100 jtl-border-b-2 jtl-border-b-jtlsecondary jtl-z-[9];
+  @apply jtl-hidden jtl-absolute jtl-top-[61px] jtl-w-full jtl-px-4 jtl-py-2 jtl-bg-white jtl-rounded-bl jtl-rounded-br jtl-shadow jtl-border-[1px] jtl-border-slate-100 jtl-border-b-2 jtl-border-b-jtlsecondary jtl-z-[9];
 
   ul {
     @apply jtl-overflow-y-auto;
@@ -200,7 +216,7 @@ html, body {
         @apply jtl-flex jtl-flex-row jtl-gap-4 jtl-justify-between jtl-items-center jtl-py-2;
 
         .jtl-text {
-          @apply jtl-text-jtlprimary jtl-font-semibold jtl-line-clamp-1;
+          @apply jtl-text-jtlprimary jtl-line-clamp-1;
         }
 
         .jtl-icon {
@@ -243,5 +259,63 @@ html, body {
   }
 }
 
+/* Buttons */
+.jtl-button {
+  @apply jtl-py-2 xl:jtl-py-3 jtl-px-4 xl:jtl-px-9 jtl-rounded jtl-space-x-2;
+
+  .jtl-text {
+    @apply jtl-font-urbanist jtl-font-semibold jtl-text-base;
+  }
+
+  &.primary {
+    @apply jtl-bg-jtlsecondary;
+
+    .jtl-text {
+      @apply jtl-text-white;
+    }
+
+    .jtl-icon {
+      @apply jtl-text-white;
+    }
+  }
+}
+
 /* END: GLOBAL */
+/* ========================================================================================================================== */
+
+/* ========================================================================================================================== */
+/* HOMEPAGE */
+
+/* Hero */
+.jtl-hero-wrap {
+  @apply jtl-relative jtl-bg-center jtl-bg-no-repeat jtl-bg-cover jtl-bg-jtlprimary jtl-px-4 jtl-py-16 sm:jtl-py-32 jtl-overflow-hidden;
+
+  /* Overlay */
+  .jtl-hero-overlay {
+    @apply jtl-absolute jtl-top-0 jtl-left-0 jtl-w-full jtl-h-full jtl-bg-jtlprimary/90 jtl-z-[1];
+  }
+
+  /* Content */
+  .jtl-hero-content {
+    .jtl-label {
+      @apply jtl-text-jtlsecondary jtl-text-sm sm:jtl-text-base xl:jtl-text-xl jtl-font-urbanist jtl-uppercase jtl-font-semibold;
+    }
+
+    .jtl-title {
+      @apply jtl-text-white jtl-text-3xl sm:jtl-text-4xl xl:jtl-text-6xl jtl-font-urbanist jtl-font-bold;
+    }
+
+    .jtl-desc {
+      @apply jtl-text-jtllight jtl-text-base sm:jtl-text-lg xl:jtl-text-xl jtl-font-urbanist;
+    }
+  }
+
+  .jtl-hero-img {
+    .jtl-img {
+      @apply jtl-absolute jtl-w-full jtl-h-auto -jtl-top-0 jtl-left-0;
+    }
+  }
+}
+
+/* END: HOMEPAGE */
 /* ========================================================================================================================== */

@@ -600,6 +600,10 @@ video {
   position: sticky;
 }
 
+.-jtl-top-0 {
+  top: -0px;
+}
+
 .jtl-left-0 {
   left: 0px;
 }
@@ -618,6 +622,14 @@ video {
 
 .jtl-z-10 {
   z-index: 10;
+}
+
+.jtl-z-\[1\] {
+  z-index: 1;
+}
+
+.jtl-z-\[2\] {
+  z-index: 2;
 }
 
 .jtl-z-\[9\] {
@@ -644,8 +656,20 @@ video {
   display: flex;
 }
 
+.jtl-grid {
+  display: grid;
+}
+
 .jtl-hidden {
   display: none;
+}
+
+.jtl-h-auto {
+  height: auto;
+}
+
+.jtl-h-full {
+  height: 100%;
 }
 
 .jtl-w-56 {
@@ -684,8 +708,16 @@ video {
   animation: jtl-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+.jtl-grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
 .jtl-flex-row {
   flex-direction: row;
+}
+
+.jtl-items-end {
+  align-items: flex-end;
 }
 
 .jtl-items-center {
@@ -714,12 +746,32 @@ video {
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
+.jtl-space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+.jtl-space-y-8 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+}
+
 .jtl-overflow-hidden {
   overflow: hidden;
 }
 
 .jtl-rounded {
   border-radius: 0.25rem;
+}
+
+.jtl-rounded-bl {
+  border-bottom-left-radius: 0.25rem;
+}
+
+.jtl-rounded-br {
+  border-bottom-right-radius: 0.25rem;
 }
 
 .jtl-border-\[1px\] {
@@ -774,9 +826,25 @@ video {
   background-color: rgb(14 10 56 / var(--tw-bg-opacity));
 }
 
+.jtl-bg-jtlprimary\/90 {
+  background-color: rgb(14 10 56 / 0.9);
+}
+
 .jtl-bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.jtl-bg-cover {
+  background-size: cover;
+}
+
+.jtl-bg-center {
+  background-position: center;
+}
+
+.jtl-bg-no-repeat {
+  background-repeat: no-repeat;
 }
 
 .jtl-px-4 {
@@ -787,6 +855,11 @@ video {
 .jtl-py-0 {
   padding-top: 0px;
   padding-bottom: 0px;
+}
+
+.jtl-py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 .jtl-py-2 {
@@ -807,8 +880,31 @@ video {
   font-family: Rubik;
 }
 
+.jtl-font-urbanist {
+  font-family: Urbanist;
+}
+
+.jtl-text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.jtl-text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.jtl-text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .jtl-font-semibold {
   font-weight: 600;
+}
+
+.jtl-uppercase {
+  text-transform: uppercase;
 }
 
 .jtl-text-jtldark {
@@ -843,6 +939,11 @@ video {
   color: rgb(255 99 14 / var(--tw-text-opacity));
 }
 
+.jtl-text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .jtl-shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
@@ -870,6 +971,24 @@ html, body {
   font-family: Rubik;
   --tw-text-opacity: 1;
   color: rgb(19 15 64 / var(--tw-text-opacity));
+}
+
+/* Animations */
+
+@keyframes kwn-sliding {
+  0%, 100% {
+    transform: translateX(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+.jtl-animate-sliding {
+  animation: kwn-sliding 1s infinite;
 }
 
 /* Container */
@@ -927,7 +1046,7 @@ html, body {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+  transition-duration: 200ms;
 }
 
 @media (min-width: 1024px) {
@@ -1198,9 +1317,6 @@ html, body {
           -webkit-line-clamp: 1;
         }
         .jtl-text {
-          font-weight: 600;
-        }
-        .jtl-text {
           --tw-text-opacity: 1;
           color: rgb(14 10 56 / var(--tw-text-opacity));
         }
@@ -1303,9 +1419,6 @@ html, body {
               -webkit-line-clamp: 1;
             }
             .jtl-text {
-              font-weight: 600;
-            }
-            .jtl-text {
               --tw-text-opacity: 1;
               color: rgb(14 10 56 / var(--tw-text-opacity));
             }
@@ -1333,7 +1446,8 @@ html, body {
   z-index: 9;
   display: none;
   width: 100%;
-  border-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
   border-width: 1px;
   border-bottom-width: 2px;
   border-color: rgb(241 245 249 / var(--tw-border-opacity));
@@ -1390,9 +1504,6 @@ html, body {
           -webkit-line-clamp: 1;
         }
         .jtl-text {
-          font-weight: 600;
-        }
-        .jtl-text {
           --tw-text-opacity: 1;
           color: rgb(14 10 56 / var(--tw-text-opacity));
         }
@@ -1438,7 +1549,213 @@ html, body {
   }
 }
 
+/* Buttons */
+
+.jtl-button > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.jtl-button {
+  border-radius: 0.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 1280px) {
+  .jtl-button {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 2.25rem;
+    padding-right: 2.25rem;
+  }
+}
+
+.jtl-button {
+  .jtl-text {
+    font-family: Urbanist;
+  }
+  .jtl-text {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  .jtl-text {
+    font-weight: 600;
+  }
+  &.primary {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 99 14 / var(--tw-bg-opacity));
+  }
+  &.primary {
+    .jtl-text {
+      --tw-text-opacity: 1;
+      color: rgb(255 255 255 / var(--tw-text-opacity));
+    }
+    .jtl-icon {
+      --tw-text-opacity: 1;
+      color: rgb(255 255 255 / var(--tw-text-opacity));
+    }
+  }
+}
+
 /* END: GLOBAL */
+
+/* ========================================================================================================================== */
+
+/* ========================================================================================================================== */
+
+/* HOMEPAGE */
+
+/* Hero */
+
+.jtl-hero-wrap {
+  position: relative;
+  overflow: hidden;
+  --tw-bg-opacity: 1;
+  background-color: rgb(14 10 56 / var(--tw-bg-opacity));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .jtl-hero-wrap {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+.jtl-hero-wrap {
+  /* Overlay */
+  .jtl-hero-overlay {
+    position: absolute;
+  }
+  .jtl-hero-overlay {
+    top: 0px;
+  }
+  .jtl-hero-overlay {
+    left: 0px;
+  }
+  .jtl-hero-overlay {
+    z-index: 1;
+  }
+  .jtl-hero-overlay {
+    height: 100%;
+  }
+  .jtl-hero-overlay {
+    width: 100%;
+  }
+  .jtl-hero-overlay {
+    background-color: rgb(14 10 56 / 0.9);
+  }
+  /* Content */
+  .jtl-hero-content {
+    .jtl-label {
+      font-family: Urbanist;
+    }
+    .jtl-label {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+    .jtl-label {
+      font-weight: 600;
+    }
+    .jtl-label {
+      text-transform: uppercase;
+    }
+    .jtl-label {
+      --tw-text-opacity: 1;
+      color: rgb(255 99 14 / var(--tw-text-opacity));
+    }
+    @media (min-width: 640px) {
+      .jtl-label {
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+    }
+    @media (min-width: 1280px) {
+      .jtl-label {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+      }
+    }
+    .jtl-title {
+      font-family: Urbanist;
+    }
+    .jtl-title {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
+    .jtl-title {
+      font-weight: 700;
+    }
+    .jtl-title {
+      --tw-text-opacity: 1;
+      color: rgb(255 255 255 / var(--tw-text-opacity));
+    }
+    @media (min-width: 640px) {
+      .jtl-title {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+      }
+    }
+    @media (min-width: 1280px) {
+      .jtl-title {
+        font-size: 3.75rem;
+        line-height: 1;
+      }
+    }
+    .jtl-desc {
+      font-family: Urbanist;
+    }
+    .jtl-desc {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+    .jtl-desc {
+      --tw-text-opacity: 1;
+      color: rgb(222 222 222 / var(--tw-text-opacity));
+    }
+    @media (min-width: 640px) {
+      .jtl-desc {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+      }
+    }
+    @media (min-width: 1280px) {
+      .jtl-desc {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+      }
+    }
+  }
+  .jtl-hero-img {
+    .jtl-img {
+      position: absolute;
+    }
+    .jtl-img {
+      top: -0px;
+    }
+    .jtl-img {
+      left: 0px;
+    }
+    .jtl-img {
+      height: auto;
+    }
+    .jtl-img {
+      width: 100%;
+    }
+  }
+}
+
+/* END: HOMEPAGE */
 
 /* ========================================================================================================================== */
 
@@ -1452,6 +1769,28 @@ html, body {
 
 .focus\:jtl-bg-jtllight\/0:focus {
   background-color: rgb(222 222 222 / 0);
+}
+
+@media (min-width: 640px) {
+  .sm\:jtl-py-32 {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
+  .sm\:jtl-text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .sm\:jtl-text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .sm\:jtl-text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -1469,5 +1808,37 @@ html, body {
 
   .lg\:jtl-hidden {
     display: none;
+  }
+
+  .lg\:jtl-grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .xl\:jtl-space-y-12 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(3rem * var(--tw-space-y-reverse));
+  }
+
+  .xl\:jtl-px-9 {
+    padding-left: 2.25rem;
+    padding-right: 2.25rem;
+  }
+
+  .xl\:jtl-py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .xl\:jtl-text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
+  .xl\:jtl-text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }

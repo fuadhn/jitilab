@@ -106,6 +106,9 @@ window.addEventListener('scroll', function() {
 // End: Header sticky
 // ==================================================
 
+// ==================================================
+// Dropdown nav (mobile)
+
 if($('.jtl-dropdown-nav').length) {
   $('.jtl-dropdown-nav ul.jtl-parent > li').on('click', (function(e) {
     e.preventDefault();
@@ -126,3 +129,6 @@ if($('.jtl-toggle-dropdown').length) {
     $('.jtl-dropdown-nav').toggleClass('active');
   }))
 }
+
+// End: Dropdown nav (mobile)
+// ==================================================
