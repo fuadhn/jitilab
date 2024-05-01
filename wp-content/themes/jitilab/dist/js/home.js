@@ -14,3 +14,20 @@ if($('.jtl-hero-img .jtl-img').length) {
     jtlUpdateHeroImg();
   }))
 }
+
+var _items = $('#jtlAchievementCarousel').find('.item').length * 2;
+
+$('#jtlAchievementCarousel').owlCarousel({
+  center: true,
+  margin: -300,
+  loop: true,
+  autoWidth: true,
+  items: _items,
+  dots: false,
+  nav: false,
+  touchDrag: false,
+  mouseDrag: false,
+  autoplay: true,
+  autoplayTimeout: 3000,
+  autoplayHoverPause: false
+})
