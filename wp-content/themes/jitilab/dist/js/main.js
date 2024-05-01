@@ -37,21 +37,33 @@ document.addEventListener('scroll', (e) => {
 // ==================================================
 // Set height main and sidebar
 
-var _window_height = $(window).height();
-var _adminbar_height = ($('#wpadminbar').length ? $('#wpadminbar').outerHeight() : 0);
-var _header_height = ($('#jtlHeader').length ? $('#jtlHeader').outerHeight() : 0);
-var _footer_height = ($('#jtlFooter').length ? $('#jtlFooter').outerHeight() : 0);
-var _min_height = _window_height - (_adminbar_height + _header_height + _footer_height);
+var jtlUpdateComponent = function() {
+  var _window_height = $(window).height();
+  var _adminbar_height = ($('#wpadminbar').length ? $('#wpadminbar').outerHeight() : 0);
+  var _header_height = ($('#jtlHeader').length ? $('#jtlHeader').outerHeight() : 0);
+  var _footer_height = ($('#jtlFooter').length ? $('#jtlFooter').outerHeight() : 0);
+  var _min_height = _window_height - (_adminbar_height + _header_height + _footer_height);
 
-// Main
-$('#jtlMain').css({
-  'min-height': _min_height
-})
+  // Main
+  $('#jtlMain').css({
+    'min-height': _min_height
+  })
 
-// Dropdown menu
-$('.jtl-dropdown-nav ul.jtl-parent').css({
-  'max-height': _min_height
-})
+  // Dropdown menu
+  $('.jtl-dropdown-nav').css({
+    'top': _adminbar_height + _header_height
+  })
+
+  $('.jtl-dropdown-nav ul.jtl-parent').css({
+    'max-height': _min_height
+  })
+}
+
+jtlUpdateComponent();
+
+$(window).on('resize', (function() {
+  jtlUpdateComponent();
+}))
 
 // End: Set height main and sidebar
 // ==================================================

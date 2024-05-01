@@ -624,14 +624,6 @@ video {
   z-index: 9;
 }
 
-.jtl-order-2 {
-  order: 2;
-}
-
-.jtl-order-1 {
-  order: 1;
-}
-
 .-jtl-ml-\[32px\] {
   margin-left: -32px;
 }

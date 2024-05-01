@@ -469,3 +469,10 @@ if(!function_exists('jitilab_lazyload_img_the_content')) {
 
 	add_filter('the_content', 'jitilab_lazyload_img_the_content');
 }
+
+// Lazyload img for the content
+if(!function_exists('jitilab_get_formatted_phone_number')) {
+	function jitilab_get_formatted_phone_number($phone) {
+		return preg_replace("/[^+0-9]/", '', $phone);
+	}
+}

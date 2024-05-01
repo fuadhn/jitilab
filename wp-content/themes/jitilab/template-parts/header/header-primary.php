@@ -8,8 +8,25 @@
  */
 
 // Constanta
+$homepage_ID = get_option('page_on_front');
+
 $home_url = home_url();
 $logo_url = wp_get_attachment_url(get_theme_mod('custom_logo'));
+
+// Fields
+$contact = get_field('contact', $homepage_ID);
+$social_media = get_field('social_media', $homepage_ID);
+
+//  Menu
+$has_primary_menu = has_nav_menu('primary');
+
+$menu_items = array();
+
+if($has_primary_menu) {
+	$locations = get_nav_menu_locations();
+	$menu = get_term($locations['primary'], 'nav_menu');
+	$menu_items = wp_get_nav_menu_items($menu->term_id);
+}
 ?>
 
 <header id="jtlHeader">
@@ -32,57 +49,80 @@ $logo_url = wp_get_attachment_url(get_theme_mod('custom_logo'));
         <div>
           <div class="jtl-flex jtl-flex-row jtl-gap-12 jtl-items-center">
             <!-- Contact -->
+            <?php if($contact) { ?>
             <div>
               <nav class="jtl-contact-nav">
                 <ul>
+                  <?php if($contact['email']) { ?>
                   <li>
-                    <a href="#">
+                    <a href="<?php echo esc_attr('mailto:' . $contact['email']); ?>">
                       <i class="fa-solid fa-envelope jtl-icon"></i>
-                      <span class="jtl-text">university@jitilab.com</span>
+                      <span class="jtl-text"><?php echo esc_html($contact['email']); ?></span>
                     </a>
                   </li>
+                  <?php } ?>
+
+                  <?php if($contact['phone']) { ?>
                   <li>
-                    <a href="#">
+                    <a href="<?php echo esc_attr('tel:' . jitilab_get_formatted_phone_number($contact['phone'])); ?>">
                       <i class="fa-solid fa-phone jtl-icon"></i>
-                      <span class="jtl-text">+62 821-3000-3411</span>
+                      <span class="jtl-text"><?php echo esc_html($contact['phone']); ?></span>
                     </a>
                   </li>
+                  <?php } ?>
                 </ul>
               </nav>
             </div>
+            <?php } ?>
 
             <!-- Socmed -->
+            <?php if($social_media) { ?>
             <div>
               <nav class="jtl-socmed-nav">
                 <ul>
+                  <?php if($social_media['instagram']) { ?>
                   <li>
-                    <a href="#">
+                    <a href="<?php echo esc_url($social_media['instagram']); ?>" target="_blank">
                       <i class="fa-brands fa-instagram fa-lg jtl-icon"></i>
                     </a>
                   </li>
+                  <?php } ?>
+
+                  <?php if($social_media['facebook']) { ?>
                   <li>
-                    <a href="#">
+                    <a href="<?php echo esc_url($social_media['facebook']); ?>" target="_blank">
                       <i class="fa-brands fa-facebook-f fa-lg jtl-icon"></i>
                     </a>
                   </li>
+                  <?php } ?>
+
+                  <?php if($social_media['twitter']) { ?>
                   <li>
-                    <a href="#">
+                    <a href="<?php echo esc_url($social_media['twitter']); ?>" target="_blank">
                       <i class="fa-brands fa-twitter fa-lg jtl-icon"></i>
                     </a>
                   </li>
+                  <?php } ?>
+
+                  <?php if($social_media['linkedin']) { ?>
                   <li>
-                    <a href="#">
+                    <a href="<?php echo esc_url($social_media['linkedin']); ?>" target="_blank">
                       <i class="fa-brands fa-linkedin fa-lg jtl-icon"></i>
                     </a>
                   </li>
+                  <?php } ?>
+                  
+                  <?php if($social_media['tiktok']) { ?>
                   <li>
-                    <a href="#">
+                    <a href="<?php echo esc_url($social_media['tiktok']); ?>" target="_blank">
                       <i class="fa-brands fa-tiktok fa-lg jtl-icon"></i>
                     </a>
                   </li>
+                  <?php } ?>
                 </ul>
               </nav>
             </div>
+            <?php } ?>
           </div>
         </div>
       </div>
@@ -96,8 +136,8 @@ $logo_url = wp_get_attachment_url(get_theme_mod('custom_logo'));
         <!-- Left -->
         <div>
           <!-- Logo -->
-          <a href="#">
-            <img width="158" height="36" src="<?php echo get_template_directory_uri() . '/dist/img/logo.webp'; ?>" alt="" class="jtl-logo" />
+          <a href="<?php echo esc_url($home_url); ?>">
+            <img width="158" height="36" src="<?php echo ($logo_url !== '' ? esc_url($logo_url) : esc_url(jitilab_get_default_logo_url())); ?>" alt="" class="jtl-logo" />
           </a>
         </div>
 
@@ -109,80 +149,74 @@ $logo_url = wp_get_attachment_url(get_theme_mod('custom_logo'));
               <!-- Desktop menu -->
               <nav class="jtl-menu-nav jtl-hidden lg:jtl-block">
                 <ul>
-                  <li>
-                    <a href="#">
-                      <span class="jtl-text">Home</span>
-                      <i class="fa-solid fa-chevron-down fa-sm jtl-icon"></i>
-                    </a>
+                  <?php
+                    if($has_primary_menu) {
+                      $i = 0;
+                      
+                      $html = '';
+                      $before_is_parent = false;
 
-                    <div class="jtl-submenu-wrap">
-                      <nav class="jtl-submenu-nav">
-                        <ul>
-                          <li>
-                            <a href="#">
-                              <span class="jtl-text">Home 1</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <span class="jtl-text">Home 2</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <span class="jtl-text">Home 3</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </nav>
-                    </div>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="jtl-text">Pages</span>
-                      <i class="fa-solid fa-chevron-down fa-sm jtl-icon"></i>
-                    </a>
+                      foreach($menu_items as $menu_item) {
+                        $link = esc_url($menu_item->url);
+                        $title = $menu_item->title;
+                        $target = $menu_item->target;
+                        $is_parent = ($menu_item->menu_item_parent == 0 ? true : false);
+                        $has_child = (isset($menu_items[$i+1]) && $menu_items[$i+1]->menu_item_parent == $menu_item->ID ? true : false);
+                        $next_is_parent = (isset($menu_items[$i+1]) && $menu_items[$i+1]->menu_item_parent == 0 ? true : false);
+                        
+                        if($is_parent && !$before_is_parent) {
+                          if(!$has_child) {
+                            $html .= '<li>' . "\n";
+                            $html .= '<a href="' . $link . '" target="' . esc_attr($target) . '">' . "\n";
+                            $html .= '<span class="jtl-text">' . esc_html($title) . '</span>' . "\n";
+                            $html .= '</a>' . "\n";
+                            $html .= '</li>' . "\n";
+                          } else {
+                            $html .= '<li>' . "\n";
+                            
+                            $html .= '<a href="#">' . "\n";
+                            $html .= '<span class="jtl-text">' . esc_html($title) . '</span>' . "\n";
+                            $html .= '<i class="fa-solid fa-chevron-down fa-sm jtl-icon"></i>' . "\n";
+                            $html .= '</a>' . "\n";
+              
+                            $html .= '<div class="jtl-submenu-wrap">' . "\n";
+                            $html .= '<nav class="jtl-submenu-nav">' . "\n";
+                            $html .= '<ul>' . "\n";
+              
+                            $before_is_parent = true;
+                          }
+                        } else {
+                          $html .= '<li>' . "\n";
+                          $html .= '<a href="' . $link . '" target="' . esc_attr($target) . '">' . "\n";
+                          $html .= '<span class="jtl-text">' . esc_html($title) . '</span>' . "\n";
+                          $html .= '</a>' . "\n";
+                          $html .= '</li>' . "\n";
+                        }
+                        
+                        if($next_is_parent && $before_is_parent) {
+                          $html .= '</ul>' . "\n";
+                          $html .= '</nav>' . "\n";
+                          $html .= '</div>' . "\n";
+                          
+                          $html .= '</li>' . "\n";
+              
+                          $before_is_parent = false;
+                        }
+          
+                        if($i == (count($menu_items) - 1) && $before_is_parent) {
+                          $html .= '</ul>' . "\n";
+                          $html .= '</nav>' . "\n";
+                          $html .= '</div>' . "\n";
+                          
+                          $html .= '</li>' . "\n";
+                        }
 
-                    <div class="jtl-submenu-wrap">
-                      <nav class="jtl-submenu-nav">
-                        <ul>
-                          <li>
-                            <a href="#">
-                              <span class="jtl-text">About Us</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <span class="jtl-text">FAQs</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </nav>
-                    </div>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="jtl-text">Courses</span>
-                      <i class="fa-solid fa-chevron-down fa-sm jtl-icon"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="jtl-text">Webinars</span>
-                      <i class="fa-solid fa-chevron-down fa-sm jtl-icon"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="jtl-text">Blog</span>
-                      <i class="fa-solid fa-chevron-down fa-sm jtl-icon"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="jtl-text">Contact</span>
-                    </a>
-                  </li>
+                        $i++;
+                      }
+                      
+                      echo $html;
+                    }
+                  ?>
                 </ul>
               </nav>
 
@@ -218,72 +252,68 @@ $logo_url = wp_get_attachment_url(get_theme_mod('custom_logo'));
     </form>
 
     <ul class="jtl-parent">
-      <li>
-        <a href="#">
-          <span class="jtl-text">Home</span>
-          <i class="fa-solid fa-chevron-down fa-sm jtl-icon"></i>
-        </a>
+    <?php
+      if($has_primary_menu) {
+        $i = 0;
+        
+        $html = '';
+        $before_is_parent = false;
 
-        <ul class="jtl-child">
-          <li>
-            <a href="#">
-              <span class="jtl-text">Home 1</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="jtl-text">Home 2</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="jtl-text">Home 3</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <span class="jtl-text">Pages</span>
-          <i class="fa-solid fa-chevron-down fa-sm jtl-icon"></i>
-        </a>
+        foreach($menu_items as $menu_item) {
+          $link = esc_url($menu_item->url);
+          $title = $menu_item->title;
+          $target = $menu_item->target;
+          $is_parent = ($menu_item->menu_item_parent == 0 ? true : false);
+          $has_child = (isset($menu_items[$i+1]) && $menu_items[$i+1]->menu_item_parent == $menu_item->ID ? true : false);
+          $next_is_parent = (isset($menu_items[$i+1]) && $menu_items[$i+1]->menu_item_parent == 0 ? true : false);
+          
+          if($is_parent && !$before_is_parent) {
+            if(!$has_child) {
+              $html .= '<li>' . "\n";
+              $html .= '<a href="' . $link . '" target="' . esc_attr($target) . '">' . "\n";
+              $html .= '<span class="jtl-text">' . esc_html($title) . '</span>' . "\n";
+              $html .= '</a>' . "\n";
+              $html .= '</li>' . "\n";
+            } else {
+              $html .= '<li>' . "\n";
+              
+              $html .= '<a href="#">' . "\n";
+              $html .= '<span class="jtl-text">' . esc_html($title) . '</span>' . "\n";
+              $html .= '<i class="fa-solid fa-chevron-down fa-sm jtl-icon"></i>' . "\n";
+              $html .= '</a>' . "\n";
 
-        <ul class="jtl-child">
-          <li>
-            <a href="#">
-              <span class="jtl-text">About Us</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="jtl-text">FAQs</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <span class="jtl-text">Courses</span>
-          <i class="fa-solid fa-chevron-down fa-sm jtl-icon"></i>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <span class="jtl-text">Webinars</span>
-          <i class="fa-solid fa-chevron-down fa-sm jtl-icon"></i>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <span class="jtl-text">Blog</span>
-          <i class="fa-solid fa-chevron-down fa-sm jtl-icon"></i>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <span class="jtl-text">Contact</span>
-        </a>
-      </li>
+              $html .= '<ul class="jtl-child">' . "\n";
+
+              $before_is_parent = true;
+            }
+          } else {
+            $html .= '<li>' . "\n";
+            $html .= '<a href="' . $link . '" target="' . esc_attr($target) . '">' . "\n";
+            $html .= '<span class="jtl-text">' . esc_html($title) . '</span>' . "\n";
+            $html .= '</a>' . "\n";
+            $html .= '</li>' . "\n";
+          }
+          
+          if($next_is_parent && $before_is_parent) {
+            $html .= '</ul>' . "\n";
+            
+            $html .= '</li>' . "\n";
+
+            $before_is_parent = false;
+          }
+
+          if($i == (count($menu_items) - 1) && $before_is_parent) {
+            $html .= '</ul>' . "\n";
+            
+            $html .= '</li>' . "\n";
+          }
+
+          $i++;
+        }
+        
+        echo $html;
+      }
+    ?>
     </ul>
   </div>
 </nav>
