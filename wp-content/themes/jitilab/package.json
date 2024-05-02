@@ -1,7 +1,8 @@
 {
   "scripts": {
     "home": "npx tailwindcss -i ./src/css/home.css -o ./dist/css/home.css --watch",
-    "list": "npx tailwindcss -i ./src/css/list-post.css -o ./dist/css/list-post.css --watch"
+    "list": "npx tailwindcss -i ./src/css/list-post.css -o ./dist/css/list-post.css --watch",
+    "single": "npx tailwindcss -i ./src/css/single.css -o ./dist/css/single.css --watch"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.3"

@@ -14,19 +14,32 @@ module.exports = {
     // "./dist/js/home.js"
 
     // List Posts
+    // "./functions.php",
+    // "./header.php",
+    // "./template-parts/header/header-primary.php",
+    // "./home.php",
+    // "./archive.php",
+    // "./search.php",
+    // "./pages/event.php",
+    // "./footer.php",
+    // "./template-parts/footer/footer-primary.php",
+    // "./src/css/list-post.css",
+    // "./dist/js/main.js",
+    // "./dist/js/blog.js",
+    // "./dist/js/event.js"
+
+    // Single
     "./functions.php",
     "./header.php",
     "./template-parts/header/header-primary.php",
-    "./home.php",
-    "./archive.php",
-    "./search.php",
-    "./pages/event.php",
+    "./single.php",
+    "./single-event.php",
+    "./page.php",
     "./footer.php",
     "./template-parts/footer/footer-primary.php",
-    "./src/css/list-post.css",
+    "./src/css/single.css",
     "./dist/js/main.js",
-    "./dist/js/blog.js",
-    "./dist/js/event.js"
+    "./dist/js/single.js"
   ],
   theme: {
     extend: {

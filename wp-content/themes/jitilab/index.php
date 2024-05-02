@@ -18,7 +18,7 @@ get_header();
 ?>
 
 <!-- Main -->
-<main id="jtlMain">
+<main id="jtlMain" class="jtl-bg-white">
   <!-- Silent is gold -->
 </main>
 
