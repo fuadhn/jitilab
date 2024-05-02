@@ -280,6 +280,15 @@ html, body {
   }
 }
 
+/* Sections */
+.jtl-section-title {
+  @apply jtl-text-jtlprimary jtl-font-urbanist jtl-font-semibold jtl-text-2xl sm:jtl-text-3xl xl:jtl-text-5xl;
+}
+
+.jtl-section-subtitle {
+  @apply jtl-max-w-5xl jtl-text-base sm:jtl-text-lg jtl-text-jtlgray;
+}
+
 /* END: GLOBAL */
 /* ========================================================================================================================== */
 

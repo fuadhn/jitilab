@@ -708,6 +708,10 @@ video {
   max-width: 64rem;
 }
 
+.jtl-max-w-\[500px\] {
+  max-width: 500px;
+}
+
 .jtl-max-w-screen-xl {
   max-width: 1280px;
 }
@@ -939,24 +943,19 @@ video {
   font-family: Urbanist;
 }
 
+.jtl-text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .jtl-text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
 
-.jtl-text-5xl {
-  font-size: 3rem;
-  line-height: 1;
-}
-
 .jtl-text-base {
   font-size: 1rem;
   line-height: 1.5rem;
-}
-
-.jtl-text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
 }
 
 .jtl-text-sm {
@@ -979,11 +978,6 @@ video {
 
 .jtl-text-jtldark\/50 {
   color: rgb(19 15 64 / 0.5);
-}
-
-.jtl-text-jtlgray {
-  --tw-text-opacity: 1;
-  color: rgb(105 105 105 / var(--tw-text-opacity));
 }
 
 .jtl-text-jtllight {
@@ -1691,6 +1685,46 @@ html, body {
   }
 }
 
+/* Sections */
+
+.jtl-section-title {
+  font-family: Urbanist;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(14 10 56 / var(--tw-text-opacity));
+}
+
+@media (min-width: 640px) {
+  .jtl-section-title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .jtl-section-title {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+
+.jtl-section-subtitle {
+  max-width: 64rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(105 105 105 / var(--tw-text-opacity));
+}
+
+@media (min-width: 640px) {
+  .jtl-section-subtitle {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
 /* END: GLOBAL */
 
 /* ========================================================================================================================== */
@@ -2066,6 +2100,11 @@ html, body {
     padding-bottom: 8rem;
   }
 
+  .sm\:jtl-text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
   .sm\:jtl-text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
@@ -2105,6 +2144,10 @@ html, body {
 
   .md\:jtl-max-w-\[375px\] {
     max-width: 375px;
+  }
+
+  .md\:jtl-max-w-none {
+    max-width: none;
   }
 
   .md\:jtl-py-4 {

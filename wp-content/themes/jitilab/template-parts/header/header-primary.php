@@ -226,7 +226,7 @@ if($has_primary_menu) {
                   <li>
                     <a href="#">
                       <button type="button" class="jtl-toggle-dropdown">
-                        <i class="fa-solid fa-bars fa-sm jtl-icon"></i>
+                        <i class="fa-solid fa-bars fa-lg fa-sm jtl-icon"></i>
                       </button>
                     </a>
                   </li>
