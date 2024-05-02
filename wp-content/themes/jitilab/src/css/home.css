@@ -375,7 +375,7 @@ html, body {
 
 /* News */
 .jtl-news-card {
-  @apply jtl-rounded-2xl jtl-border-[1px] jtl-border-b-slate-200;
+  @apply jtl-rounded-2xl jtl-border-[1px] jtl-border-slate-200;
 
   .jtl-news-thumbnail {
     @apply jtl-rounded-tl-2xl jtl-rounded-tr-2xl jtl-border-b-[1px] jtl-border-b-slate-200;

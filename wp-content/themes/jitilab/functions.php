@@ -486,3 +486,24 @@ if(!function_exists('jitilab_get_formatted_phone_number')) {
 		return preg_replace("/[^+0-9]/", '', $phone);
 	}
 }
+
+// Get the permalink of blog page by template
+if(!function_exists('jitilab_page_of_events')) {
+	function jitilab_page_of_events() {
+		$result = null;
+
+		$pages = get_pages(array(
+			'meta_key' => '_wp_page_template',
+			'meta_value' => 'pages/event.php'
+		));
+
+		if($pages) {
+			$result = array(
+				'permalink' => get_the_permalink($pages[0]->ID),
+				'title' => get_the_title($pages[0]->ID)
+			);
+		}
+
+		return $result;
+	}
+}

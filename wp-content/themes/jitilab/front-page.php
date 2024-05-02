@@ -12,6 +12,7 @@
   // Constanta
   $homepage_ID = get_option('page_on_front');
   $postpage_ID = get_option('page_for_posts');
+  $event_page = jitilab_page_of_events();
 
   // Fields: Hero
   $hero_background = get_field('hero_background', $homepage_ID);
@@ -35,6 +36,17 @@
   );
 
   $latest_posts = new WP_Query($args);
+
+  // Events
+  $args = array(
+    'post_type' => 'event',
+    'post_status' => 'publish',
+    'posts_per_page' => 12,
+    'order' => 'DESC',
+    'orderby' => 'date'
+  );
+
+  $events = new WP_Query($args);
 
   // Achievement posts
   $args = array(
@@ -99,7 +111,7 @@
       <div class="jtl-custom-container">
         <div class="jtl-space-y-8">
           <div class="jtl-flex jtl-flex-col jtl-gap-4 jtl-items-center">
-            <h2 class="jtl-section-title jtl-text-center jtl-max-w-[500px] md:jtl-max-w-none"><?php echo get_the_title($postpage_ID); ?></h2>
+            <h2 class="jtl-section-title jtl-text-center jtl-max-w-[500px] md:jtl-max-w-none"><?php echo esc_html(get_the_title($postpage_ID)); ?></h2>
             <div class="jtl-section-accent"></div>
           </div>
 
@@ -154,15 +166,73 @@
     <?php wp_reset_postdata(); ?>
 
     <!-- Event -->
+    <?php if($events->have_posts()) { ?>
     <section class="jtl-bg-jtlsoft jtl-px-4 jtl-py-8 sm:jtl-py-16">
       <div class="jtl-custom-container">
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, expedita. Laborum, dolore recusandae corporis natus quaerat beatae sapiente, dignissimos magni voluptas sint velit numquam placeat est! Sunt eum atque odit?</p>
+      <div class="jtl-space-y-8">
+          <div class="jtl-flex jtl-flex-col jtl-gap-4 jtl-items-center">
+            <?php if($event_page) { ?>
+            <h2 class="jtl-section-title jtl-text-center jtl-max-w-[500px] md:jtl-max-w-none"><?php echo esc_html($event_page['title']); ?></h2>
+            <?php } ?>
+
+            <div class="jtl-section-accent"></div>
+          </div>
+
+          <div id="jtlEventCarousel" class="owl-carousel owl-theme">
+            <?php while($events->have_posts()) : $events->the_post(); ?>
+            <?php
+              $post_ID = get_the_ID();
+              $permalink = get_the_permalink();
+              $thumbnail = jitilab_get_the_post_thumbnail_url($post_ID);
+              $title = get_the_title();
+              $date = get_the_date();
+            ?>
+            <div class="item">
+              <a href="<?php echo esc_url($permalink); ?>">
+                <div class="jtl-news-card">
+                  <!-- Thumbnail -->
+                  <div class="jtl-news-thumbnail">
+                    <?php if(has_post_thumbnail()) { ?>
+                    <img width="415" height="300" src="" data-image="<?php echo esc_url($thumbnail); ?>" alt="" class="jtl-lazyload jtl-thumbnail-image" />
+                    
+                    <noscript>
+                      <img width="415" height="300" src="<?php echo esc_url($thumbnail); ?>" alt="" class="jtl-thumbnail-image" />
+                    </noscript>
+                    <?php } else { ?>
+                    <div class="jtl-empty-thumbnail"></div>
+                    <?php } ?>
+                  </div>
+
+                  <!-- Content -->
+                  <div class="jtl-news-content">
+                    <h3 class="jtl-news-title"><?php echo esc_html($title); ?></h3>
+                    <p class="jtl-news-category"><?php echo esc_html($date); ?></p>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <?php endwhile; ?>
+          </div>
+
+          <?php if($event_page) { ?>
+          <div class="jtl-flex jtl-justify-center">
+            <a href="<?php echo esc_url($event_page['permalink']); ?>">
+              <button type="button" class="jtl-button primary">
+                <span class="jtl-text"><?php echo __('Lihat Selengkapnya', 'jitilab'); ?></span>
+                <i class="fa-solid fa-arrow-right jtl-icon jtl-animate-sliding"></i>
+              </button>
+            </a>
+          </div>
+          <?php } ?>
+        </div>
       </div>
     </section>
+    <?php } ?>
+    <?php wp_reset_postdata(); ?>
 
     <!-- Achievement -->
     <?php if($achievements->have_posts()) { ?>
-    <section class="jtl-bg-white">
+    <section class="jtl-bg-white jtl-border-b-4 jtl-border-b-jtlsecondary">
       <div class="jtl-custom-container">
         <div class="jtl-px-4 jtl-py-8 sm:jtl-py-16">
           <div class="jtl-flex jtl-flex-col jtl-gap-4 jtl-items-center">

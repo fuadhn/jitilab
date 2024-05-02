@@ -85,3 +85,45 @@ $('#jtlNewsCarousel').owlCarousel({
 
 // End: News carousel
 // ==================================================
+
+// ==================================================
+// Event carousel
+
+$('#jtlEventCarousel').owlCarousel({
+  center: false,
+  margin: 16,
+  loop: false,
+  autoWidth: false,
+  items: 3,
+  dots: true,
+  nav: false,
+  touchDrag: true,
+  mouseDrag: true,
+  autoplay: false,
+  autoplayTimeout: 3000,
+  autoplayHoverPause: false,
+  responsiveClass:true,
+  responsive:{
+    0: {
+      items: 1
+    },
+    640: {
+      items: 2
+    },
+    768: {
+      items: 2
+    },
+    1024: {
+      items: 2
+    },
+    1280: {
+      items: 3
+    },
+    1536: {
+      items: 3
+    }
+  }
+})
+
+// End: Event carousel
+// ==================================================
