@@ -396,8 +396,8 @@ remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 
 // Custom functions
 if(!function_exists('jitilab_get_default_logo_url')) {
-	function jitilab_get_default_logo_url() {
-		return get_template_directory_uri() . '/dist/img/logo.webp';
+	function jitilab_get_default_logo_url($style='') {
+		return get_template_directory_uri() . '/dist/img/logo' . $style . '.webp';
 	}
 }
 
