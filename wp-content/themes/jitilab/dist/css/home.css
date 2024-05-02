@@ -656,6 +656,13 @@ video {
   margin-top: -61px;
 }
 
+.jtl-line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 .jtl-block {
   display: block;
 }
@@ -676,12 +683,24 @@ video {
   display: none;
 }
 
+.jtl-h-\[200px\] {
+  height: 200px;
+}
+
+.jtl-h-\[3px\] {
+  height: 3px;
+}
+
 .jtl-h-auto {
   height: auto;
 }
 
 .jtl-h-full {
   height: 100%;
+}
+
+.jtl-w-20 {
+  width: 5rem;
 }
 
 .jtl-w-56 {
@@ -768,6 +787,10 @@ video {
   align-items: center;
 }
 
+.jtl-justify-center {
+  justify-content: center;
+}
+
 .jtl-justify-between {
   justify-content: space-between;
 }
@@ -816,12 +839,32 @@ video {
   border-radius: 0.25rem;
 }
 
+.jtl-rounded-2xl {
+  border-radius: 1rem;
+}
+
 .jtl-rounded-bl {
   border-bottom-left-radius: 0.25rem;
 }
 
+.jtl-rounded-bl-2xl {
+  border-bottom-left-radius: 1rem;
+}
+
 .jtl-rounded-br {
   border-bottom-right-radius: 0.25rem;
+}
+
+.jtl-rounded-br-2xl {
+  border-bottom-right-radius: 1rem;
+}
+
+.jtl-rounded-tl-2xl {
+  border-top-left-radius: 1rem;
+}
+
+.jtl-rounded-tr-2xl {
+  border-top-right-radius: 1rem;
 }
 
 .jtl-border-\[1px\] {
@@ -838,6 +881,10 @@ video {
 
 .jtl-border-t-2 {
   border-top-width: 2px;
+}
+
+.jtl-border-jtllight\/10 {
+  border-color: rgb(222 222 222 / 0.1);
 }
 
 .jtl-border-jtllight\/20 {
@@ -880,6 +927,11 @@ video {
   background-color: rgb(14 10 56 / 0.9);
 }
 
+.jtl-bg-jtlsoft {
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 247 247 / var(--tw-bg-opacity));
+}
+
 .jtl-bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -895,6 +947,10 @@ video {
 
 .jtl-bg-no-repeat {
   background-repeat: no-repeat;
+}
+
+.jtl-p-4 {
+  padding: 1rem;
 }
 
 .jtl-px-4 {
@@ -958,9 +1014,18 @@ video {
   line-height: 1.5rem;
 }
 
+.jtl-text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .jtl-text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.jtl-font-medium {
+  font-weight: 500;
 }
 
 .jtl-font-semibold {
@@ -978,6 +1043,11 @@ video {
 
 .jtl-text-jtldark\/50 {
   color: rgb(19 15 64 / 0.5);
+}
+
+.jtl-text-jtlgray {
+  --tw-text-opacity: 1;
+  color: rgb(105 105 105 / var(--tw-text-opacity));
 }
 
 .jtl-text-jtllight {
@@ -1725,6 +1795,14 @@ html, body {
   }
 }
 
+.jtl-section-accent {
+  display: inline-block;
+  height: 3px;
+  width: 5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 99 14 / var(--tw-bg-opacity));
+}
+
 /* END: GLOBAL */
 
 /* ========================================================================================================================== */
@@ -1878,6 +1956,8 @@ html, body {
     }
   }
 }
+
+/* Achievement */
 
 #jtlAchievementCarousel {
   .owl-stage {
@@ -2073,6 +2153,147 @@ html, body {
   }
 }
 
+/* News */
+
+.jtl-news-card {
+  border-radius: 1rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(226 232 240 / var(--tw-border-opacity));
+  .jtl-news-thumbnail {
+    border-top-left-radius: 1rem;
+  }
+  .jtl-news-thumbnail {
+    border-top-right-radius: 1rem;
+  }
+  .jtl-news-thumbnail {
+    border-bottom-width: 1px;
+  }
+  .jtl-news-thumbnail {
+    --tw-border-opacity: 1;
+    border-bottom-color: rgb(226 232 240 / var(--tw-border-opacity));
+  }
+  .jtl-news-thumbnail {
+    .jtl-thumbnail-image {
+      height: 200px;
+    }
+    .jtl-thumbnail-image {
+      width: 100%;
+    }
+    .jtl-thumbnail-image {
+      border-top-left-radius: 1rem;
+    }
+    .jtl-thumbnail-image {
+      border-top-right-radius: 1rem;
+    }
+    .jtl-thumbnail-image {
+      -o-object-fit: cover;
+         object-fit: cover;
+    }
+    @media (min-width: 768px) {
+      .jtl-thumbnail-image {
+        height: 250px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .jtl-thumbnail-image {
+        height: 300px;
+      }
+    }
+    .jtl-empty-thumbnail {
+      height: 200px;
+    }
+    .jtl-empty-thumbnail {
+      width: 100%;
+    }
+    @keyframes jtl-pulse {
+      50% {
+        opacity: .5;
+      }
+    }
+    .jtl-empty-thumbnail {
+      animation: jtl-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    .jtl-empty-thumbnail {
+      border-top-left-radius: 1rem;
+    }
+    .jtl-empty-thumbnail {
+      border-top-right-radius: 1rem;
+    }
+    .jtl-empty-thumbnail {
+      --tw-bg-opacity: 1;
+      background-color: rgb(247 247 247 / var(--tw-bg-opacity));
+    }
+    @media (min-width: 768px) {
+      .jtl-empty-thumbnail {
+        height: 250px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .jtl-empty-thumbnail {
+        height: 300px;
+      }
+    }
+  }
+  .jtl-news-content > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
+  }
+  .jtl-news-content {
+    border-bottom-left-radius: 1rem;
+  }
+  .jtl-news-content {
+    border-bottom-right-radius: 1rem;
+  }
+  .jtl-news-content {
+    padding: 1rem;
+  }
+  .jtl-news-content {
+    .jtl-news-title {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+    .jtl-news-title {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+    .jtl-news-title {
+      font-weight: 500;
+    }
+    .jtl-news-title {
+      --tw-text-opacity: 1;
+      color: rgb(14 10 56 / var(--tw-text-opacity));
+    }
+    .jtl-news-title:hover {
+      --tw-text-opacity: 1;
+      color: rgb(255 99 14 / var(--tw-text-opacity));
+    }
+    @media (min-width: 768px) {
+      .jtl-news-title {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+      }
+    }
+    .jtl-news-category {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+    .jtl-news-category {
+      --tw-text-opacity: 1;
+      color: rgb(105 105 105 / var(--tw-text-opacity));
+    }
+    @media (min-width: 1024px) {
+      .jtl-news-category {
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+    }
+  }
+}
+
 /* END: HOMEPAGE */
 
 /* ========================================================================================================================== */
@@ -2134,6 +2355,10 @@ html, body {
     display: block;
   }
 
+  .md\:jtl-h-\[250px\] {
+    height: 250px;
+  }
+
   .md\:jtl-w-\[600px\] {
     width: 600px;
   }
@@ -2153,6 +2378,11 @@ html, body {
   .md\:jtl-py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+  .md\:jtl-text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 
   .md\:jtl-blur-\[2px\] {
@@ -2176,6 +2406,10 @@ html, body {
 
   .lg\:jtl-hidden {
     display: none;
+  }
+
+  .lg\:jtl-h-\[300px\] {
+    height: 300px;
   }
 
   .lg\:jtl-grid-cols-2 {

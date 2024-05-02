@@ -11,6 +11,7 @@
 
   // Constanta
   $homepage_ID = get_option('page_on_front');
+  $postpage_ID = get_option('page_for_posts');
 
   // Fields: Hero
   $hero_background = get_field('hero_background', $homepage_ID);
@@ -23,6 +24,17 @@
   // Fields: Achievement
   $achievement_title = get_field('achievement_title', $homepage_ID);
   $achievement_subtitle = get_field('achievement_subtitle', $homepage_ID);
+
+  // Latest posts
+  $args = array(
+    'post_type' => 'post',
+    'post_status' => 'publish',
+    'posts_per_page' => 12,
+    'order' => 'DESC',
+    'orderby' => 'date'
+  );
+
+  $latest_posts = new WP_Query($args);
 
   // Achievement posts
   $args = array(
@@ -81,6 +93,73 @@
       </div>
     </section>
 
+    <!-- Blog -->
+    <?php if($latest_posts->have_posts()) { ?>
+    <section class="jtl-bg-white jtl-px-4 jtl-py-8 sm:jtl-py-16">
+      <div class="jtl-custom-container">
+        <div class="jtl-space-y-8">
+          <div class="jtl-flex jtl-flex-col jtl-gap-4 jtl-items-center">
+            <h2 class="jtl-section-title jtl-text-center jtl-max-w-[500px] md:jtl-max-w-none"><?php echo get_the_title($postpage_ID); ?></h2>
+            <div class="jtl-section-accent"></div>
+          </div>
+
+          <div id="jtlNewsCarousel" class="owl-carousel owl-theme">
+            <?php while($latest_posts->have_posts()) : $latest_posts->the_post(); ?>
+            <?php
+              $post_ID = get_the_ID();
+              $permalink = get_the_permalink();
+              $thumbnail = jitilab_get_the_post_thumbnail_url($post_ID);
+              $title = get_the_title();
+              $categories = get_the_category();
+            ?>
+            <div class="item">
+              <a href="<?php echo esc_url($permalink); ?>">
+                <div class="jtl-news-card">
+                  <!-- Thumbnail -->
+                  <div class="jtl-news-thumbnail">
+                    <?php if(has_post_thumbnail()) { ?>
+                    <img width="415" height="300" src="" data-image="<?php echo esc_url($thumbnail); ?>" alt="" class="jtl-lazyload jtl-thumbnail-image" />
+                    
+                    <noscript>
+                      <img width="415" height="300" src="<?php echo esc_url($thumbnail); ?>" alt="" class="jtl-thumbnail-image" />
+                    </noscript>
+                    <?php } else { ?>
+                    <div class="jtl-empty-thumbnail"></div>
+                    <?php } ?>
+                  </div>
+
+                  <!-- Content -->
+                  <div class="jtl-news-content">
+                    <h3 class="jtl-news-title"><?php echo esc_html($title); ?></h3>
+                    <p class="jtl-news-category"><?php echo esc_html($categories[0]->name); ?></p>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <?php endwhile; ?>
+          </div>
+
+          <div class="jtl-flex jtl-justify-center">
+            <a href="<?php echo esc_url(get_the_permalink($postpage_ID)); ?>">
+              <button type="button" class="jtl-button primary">
+                <span class="jtl-text"><?php echo __('Lihat Selengkapnya', 'jitilab'); ?></span>
+                <i class="fa-solid fa-arrow-right jtl-icon jtl-animate-sliding"></i>
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <?php } ?>
+    <?php wp_reset_postdata(); ?>
+
+    <!-- Event -->
+    <section class="jtl-bg-jtlsoft jtl-px-4 jtl-py-8 sm:jtl-py-16">
+      <div class="jtl-custom-container">
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, expedita. Laborum, dolore recusandae corporis natus quaerat beatae sapiente, dignissimos magni voluptas sint velit numquam placeat est! Sunt eum atque odit?</p>
+      </div>
+    </section>
+
     <!-- Achievement -->
     <?php if($achievements->have_posts()) { ?>
     <section class="jtl-bg-white">
@@ -111,6 +190,8 @@
             <div class="jtl-achievement-details">
               <div class="jtl-space-y-2">
                 <h3 class="jtl-name"><?php echo esc_html($student_name); ?></h3>
+                
+                <hr class="jtl-border-jtllight/10" />
                 
                 <div class="jtl-space-y-0">
                   <h4 class="jtl-achievement"><?php echo esc_html($achievement_details['achievement']); ?></h4>

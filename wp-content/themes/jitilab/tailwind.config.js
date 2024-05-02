@@ -19,6 +19,7 @@ module.exports = {
         'jtlprimary': '#0e0a38',
         'jtlsecondary': '#ff630e',
         'jtllight': '#dedede',
+        'jtlsoft': '#f7f7f7',
         'jtldark': '#130f40',
         'jtlgray': '#696969'
       },
