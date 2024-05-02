@@ -36,7 +36,7 @@ if($has_primary_menu) {
       <div class="jtl-flex jtl-flex-row jtl-gap-4 jtl-items-center jtl-justify-between">
         <!-- Left -->
         <div>
-          <form action="#" method="GET" class="jtl-search-form">
+          <form action="<?php echo esc_url(home_url()); ?>" method="GET" class="jtl-search-form">
             <input type="search" name="s" class="jtl-search-input" autocomplete="off" placeholder="<?php echo __('Pencarian kata kunci..', 'jitilab'); ?>" />
 
             <button type="submit" class="jtl-search-button">
@@ -243,7 +243,7 @@ if($has_primary_menu) {
 <!-- Nav: Dropdown mobile menu -->
 <nav class="jtl-dropdown-nav">
   <div class="jtl-custom-container jtl-space-y-2">
-    <form action="#" method="GET" class="jtl-search-form dropdown">
+    <form action="<?php echo esc_url(home_url()); ?>" method="GET" class="jtl-search-form dropdown">
       <input type="search" name="s" class="jtl-search-input jtl-w-full" autocomplete="off" placeholder="<?php echo __('Pencarian kata kunci..', 'jitilab'); ?>" />
 
       <button type="submit" class="jtl-search-button">

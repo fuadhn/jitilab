@@ -81,14 +81,14 @@ _header_sticky.addClass('jtl-header-sticky');
 _header_sticky.prependTo('body');
 
 // Update header sticky state
-var timer = null;
+var timer_main = null;
 
 window.addEventListener('scroll', function() {
-  if(timer !== null) {
-    clearTimeout(timer);        
+  if(timer_main !== null) {
+    clearTimeout(timer_main);        
   }
 
-  timer = setTimeout(function() {
+  timer_main = setTimeout(function() {
     var _scroll_top = $(this).scrollTop();
 
     if(_scroll_top > 450) {

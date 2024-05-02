@@ -211,9 +211,10 @@ function jitilab_scripts() {
 		wp_enqueue_style('jitilab-fa-style', get_template_directory_uri() . '/dist/fonts/fontawesome-free-6.5.2-web/css/fontawesome.min.css', array(), filemtime(get_template_directory() . '/dist/fonts/fontawesome-free-6.5.2-web/css/fontawesome.min.css'), 'all');
 		wp_enqueue_style('jitilab-fa-brands-style', get_template_directory_uri() . '/dist/fonts/fontawesome-free-6.5.2-web/css/brands.min.css', array(), filemtime(get_template_directory() . '/dist/fonts/fontawesome-free-6.5.2-web/css/brands.min.css'), 'all');
 		wp_enqueue_style('jitilab-fa-solid-style', get_template_directory_uri() . '/dist/fonts/fontawesome-free-6.5.2-web/css/solid.min.css', array(), filemtime(get_template_directory() . '/dist/fonts/fontawesome-free-6.5.2-web/css/solid.min.css'), 'all');
+		wp_enqueue_style('jitilab-fa-regular-style', get_template_directory_uri() . '/dist/fonts/fontawesome-free-6.5.2-web/css/regular.min.css', array(), filemtime(get_template_directory() . '/dist/fonts/fontawesome-free-6.5.2-web/css/regular.min.css'), 'all');
 
 		// Frontpage
-		if(is_home() || is_front_page()) {
+		if(is_front_page()) {
 			// Owl
 			wp_enqueue_style('jitilab-owl-carousel-style', get_template_directory_uri() . '/dist/owl/assets/owl.carousel.min.css', array(), filemtime(get_template_directory() . '/dist/owl/assets/owl.carousel.min.css'), 'all');
 			wp_enqueue_style('jitilab-owl-theme-style', get_template_directory_uri() . '/dist/owl/assets/owl.theme.default.min.css', array(), filemtime(get_template_directory() . '/dist/owl/assets/owl.theme.default.min.css'), 'all');
@@ -228,7 +229,53 @@ function jitilab_scripts() {
 
 			// JS
 			wp_enqueue_script( 'jitilab-home-js', get_template_directory_uri() . '/dist/js/home.js', array('jitilab-jquery-js', 'jitilab-main-js'), filemtime(get_template_directory() . '/dist/js/home.js'), true );
+		} else if(is_page_template('pages/event.php')) {
+			// Main CSS
+			wp_enqueue_style('jitilab-list-post-style', get_template_directory_uri() . '/dist/css/list-post.css', array(), filemtime(get_template_directory() . '/dist/css/list-post.css'), 'all');
+
+			// Scripts
+
+			// JS
+			wp_enqueue_script( 'jitilab-event-js', get_template_directory_uri() . '/dist/js/event.js', array('jitilab-jquery-js', 'jitilab-main-js'), filemtime(get_template_directory() . '/dist/js/event.js'), true );
+
+			wp_localize_script('jitilab-event-js', 'wpObj', 
+				array(
+					'ajax_url' => admin_url('admin-ajax.php'),
+					'security' => wp_create_nonce('jitilab-security-nonce')
+				)
+			);
 		}
+	}
+
+	// Blog
+	if(is_home() || is_search() || is_archive()) {
+		// Styles
+
+		wp_deregister_style('wp-block-library');
+		wp_deregister_style('wp-block-library-theme-inline'); // no effect
+		wp_deregister_style('classic-theme-styles');
+		wp_deregister_style('global-styles-inline'); // no effect
+
+		// Font Awesome
+		wp_enqueue_style('jitilab-fa-style', get_template_directory_uri() . '/dist/fonts/fontawesome-free-6.5.2-web/css/fontawesome.min.css', array(), filemtime(get_template_directory() . '/dist/fonts/fontawesome-free-6.5.2-web/css/fontawesome.min.css'), 'all');
+		wp_enqueue_style('jitilab-fa-brands-style', get_template_directory_uri() . '/dist/fonts/fontawesome-free-6.5.2-web/css/brands.min.css', array(), filemtime(get_template_directory() . '/dist/fonts/fontawesome-free-6.5.2-web/css/brands.min.css'), 'all');
+		wp_enqueue_style('jitilab-fa-solid-style', get_template_directory_uri() . '/dist/fonts/fontawesome-free-6.5.2-web/css/solid.min.css', array(), filemtime(get_template_directory() . '/dist/fonts/fontawesome-free-6.5.2-web/css/solid.min.css'), 'all');
+		wp_enqueue_style('jitilab-fa-regular-style', get_template_directory_uri() . '/dist/fonts/fontawesome-free-6.5.2-web/css/regular.min.css', array(), filemtime(get_template_directory() . '/dist/fonts/fontawesome-free-6.5.2-web/css/regular.min.css'), 'all');
+
+		// Main CSS
+		wp_enqueue_style('jitilab-list-post-style', get_template_directory_uri() . '/dist/css/list-post.css', array(), filemtime(get_template_directory() . '/dist/css/list-post.css'), 'all');
+
+		// Scripts
+
+		// JS
+		wp_enqueue_script( 'jitilab-blog-js', get_template_directory_uri() . '/dist/js/blog.js', array('jitilab-jquery-js', 'jitilab-main-js'), filemtime(get_template_directory() . '/dist/js/blog.js'), true );
+
+		wp_localize_script('jitilab-blog-js', 'wpObj', 
+			array(
+				'ajax_url' => admin_url('admin-ajax.php'),
+				'security' => wp_create_nonce('jitilab-security-nonce')
+			)
+		);
 	}
 
 	// Scripts
@@ -413,7 +460,10 @@ add_action( 'before_delete_post', function( $id ) {
 if(!function_exists('jitilab_archive_pagesize')) {
 	function jitilab_archive_pagesize( $query ) {
 		if ( ! is_admin() && $query->is_main_query() && (is_archive() || is_search()) ) {
-			$query->set( 'posts_per_page', 12 );
+			$query->set( 'post_type', 'post' );
+			$query->set( 'post_status', 'publish' );
+
+			// $query->set( 'posts_per_page', -1 );
 			
 			return;
 		}
@@ -505,5 +555,192 @@ if(!function_exists('jitilab_page_of_events')) {
 		}
 
 		return $result;
+	}
+}
+
+// Ajax endpoint for load more posts
+if(!function_exists('jitilab_load_more_post')) {
+	add_action('wp_ajax_nopriv_load_more_post', 'jitilab_load_more_post');    
+	add_action('wp_ajax_load_more_post', 'jitilab_load_more_post');
+
+	function jitilab_load_more_post() {
+		if ( ! check_ajax_referer( 'jitilab-security-nonce', 'security', false ) ) {
+			wp_send_json_error( 'Invalid security token sent.' );
+			wp_die();
+		}
+
+		global $wp_query;
+
+		$offset = sanitize_text_field($_REQUEST['offset']);
+		$max_posts = sanitize_text_field($_REQUEST['max_posts']);
+		$category = sanitize_text_field($_REQUEST['category']);
+		$tag = sanitize_text_field($_REQUEST['tag']);
+		$keyword = sanitize_text_field($_REQUEST['keyword']);
+
+		$args1 = $wp_query->query_vars;
+		$args2 = $wp_query->query_vars;
+
+		$args1['posts_per_page'] = $max_posts;
+		$args1['offset'] = $offset;
+		
+		if($category !== '') {
+			$args1['category'] = $category;
+		}
+
+		if($tag !== '') {
+			$args1['tag'] = $tag;
+		}
+
+		if($keyword !== '') {
+			$args1['s'] = $keyword;
+		}
+
+		$recent_posts = get_posts($args1);
+
+		$args2['offset'] = $offset;
+		
+		if($category !== '') {
+			$args2['category'] = $category;
+		}
+
+		if($tag !== '') {
+			$args2['tag'] = $tag;
+		}
+
+		if($keyword !== '') {
+			$args2['s'] = $keyword;
+		}
+
+		$next_posts = get_posts($args2);
+
+		$html = "";
+
+		if(count($recent_posts) > 0) {
+			foreach($recent_posts as $p) {
+				$permalink = get_the_permalink($p->ID);
+				$thumbnail = jitilab_get_the_post_thumbnail_url($p->ID);
+				$title = get_the_title($p->ID);
+				$categories = get_the_category($p->ID);
+
+				$html .= '<div class="jtl-post-item">
+					<a href="' . esc_url($permalink) . '">
+						<div class="jtl-news-card">
+							<!-- Thumbnail -->
+							<div class="jtl-news-thumbnail">';
+								if($thumbnail) {
+								$html .= '<img width="415" height="300" src="" data-image="' . esc_url($thumbnail) . '" alt="" class="jtl-lazyload jtl-thumbnail-image" />
+								
+								<noscript>
+									<img width="415" height="300" src="' . esc_url($thumbnail) . '" alt="" class="jtl-thumbnail-image" />
+								</noscript>';
+								} else {
+								$html .= '<div class="jtl-empty-thumbnail"></div>';
+								}
+							$html .= '</div>
+
+							<!-- Content -->
+							<div class="jtl-news-content">
+								<h3 class="jtl-news-title">' . esc_html($title) . '</h3>
+								<p class="jtl-news-category">' . esc_html($categories[0]->name) . '</p>
+							</div>
+						</div>
+					</a>
+				</div>';
+			}
+		}
+
+		wp_reset_postdata();
+  
+		$return = array(
+			'success' => true,
+			'html' => $html,
+			'next' => (count($next_posts) > count($recent_posts) ? true : false)
+		);
+
+		wp_send_json($return);
+	}
+}
+
+// Ajax endpoint for load more events
+if(!function_exists('jitilab_load_more_event')) {
+	add_action('wp_ajax_nopriv_load_more_event', 'jitilab_load_more_event');    
+	add_action('wp_ajax_load_more_event', 'jitilab_load_more_event');
+
+	function jitilab_load_more_event() {
+		if ( ! check_ajax_referer( 'jitilab-security-nonce', 'security', false ) ) {
+			wp_send_json_error( 'Invalid security token sent.' );
+			wp_die();
+		}
+
+		global $wp_query;
+
+		$offset = sanitize_text_field($_REQUEST['offset']);
+		$max_posts = sanitize_text_field($_REQUEST['max_posts']);
+
+		$args1 = $wp_query->query_vars;
+		$args2 = $wp_query->query_vars;
+
+		$recent_posts = wp_get_recent_posts(array(
+			'post_type' => 'event',
+			'post_status' => 'publish',
+			'order' => 'DESC',
+			'orderby' => 'date',
+			'numberposts' => $max_posts,
+			'offset' => $offset
+		));
+
+		$next_posts = wp_get_recent_posts(array(
+			'post_type' => 'event',
+			'post_status' => 'publish',
+			'order' => 'DESC',
+			'orderby' => 'date',
+			'offset' => $offset
+		));
+
+		$html = "";
+
+		if(count($recent_posts) > 0) {
+			foreach($recent_posts as $p) {
+				$permalink = get_the_permalink($p['ID']);
+				$thumbnail = jitilab_get_the_post_thumbnail_url($p['ID']);
+				$title = get_the_title($p['ID']);
+				$date = get_the_date('M d, Y', $p['ID']);
+
+				$html .= '<div class="jtl-post-item">
+					<a href="' . esc_url($permalink) . '">
+						<div class="jtl-news-card">
+							<!-- Thumbnail -->
+							<div class="jtl-news-thumbnail">';
+								if($thumbnail) {
+								$html .= '<img width="415" height="300" src="" data-image="' . esc_url($thumbnail) . '" alt="" class="jtl-lazyload jtl-thumbnail-image" />
+								
+								<noscript>
+									<img width="415" height="300" src="' . esc_url($thumbnail) . '" alt="" class="jtl-thumbnail-image" />
+								</noscript>';
+								} else {
+								$html .= '<div class="jtl-empty-thumbnail"></div>';
+								}
+							$html .= '</div>
+
+							<!-- Content -->
+							<div class="jtl-news-content">
+								<h3 class="jtl-news-title">' . esc_html($title) . '</h3>
+								<p class="jtl-news-category">' . esc_html($date) . '</p>
+							</div>
+						</div>
+					</a>
+				</div>';
+			}
+		}
+
+		wp_reset_postdata();
+  
+		$return = array(
+			'success' => true,
+			'html' => $html,
+			'next' => (count($next_posts) > count($recent_posts) ? true : false)
+		);
+
+		wp_send_json($return);
 	}
 }

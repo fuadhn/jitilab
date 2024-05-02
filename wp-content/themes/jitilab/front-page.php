@@ -111,7 +111,7 @@
       <div class="jtl-custom-container">
         <div class="jtl-space-y-8">
           <div class="jtl-flex jtl-flex-col jtl-gap-4 jtl-items-center">
-            <h2 class="jtl-section-title jtl-text-center jtl-max-w-[500px] md:jtl-max-w-none"><?php echo esc_html(get_the_title($postpage_ID)); ?></h2>
+            <h2 class="jtl-section-title jtl-text-center"><?php echo esc_html(get_the_title($postpage_ID)); ?></h2>
             <div class="jtl-section-accent"></div>
           </div>
 
@@ -172,7 +172,7 @@
       <div class="jtl-space-y-8">
           <div class="jtl-flex jtl-flex-col jtl-gap-4 jtl-items-center">
             <?php if($event_page) { ?>
-            <h2 class="jtl-section-title jtl-text-center jtl-max-w-[500px] md:jtl-max-w-none"><?php echo esc_html($event_page['title']); ?></h2>
+            <h2 class="jtl-section-title jtl-text-center"><?php echo esc_html($event_page['title']); ?></h2>
             <?php } ?>
 
             <div class="jtl-section-accent"></div>

@@ -3,15 +3,30 @@ module.exports = {
   prefix: 'jtl-',
   content: [
     // Home
+    // "./functions.php",
+    // "./header.php",
+    // "./template-parts/header/header-primary.php",
+    // "./front-page.php",
+    // "./footer.php",
+    // "./template-parts/footer/footer-primary.php",
+    // "./src/css/home.css",
+    // "./dist/js/main.js",
+    // "./dist/js/home.js"
+
+    // List Posts
     "./functions.php",
     "./header.php",
     "./template-parts/header/header-primary.php",
-    "./front-page.php",
+    "./home.php",
+    "./archive.php",
+    "./search.php",
+    "./pages/event.php",
     "./footer.php",
     "./template-parts/footer/footer-primary.php",
-    "./src/css/home.css",
+    "./src/css/list-post.css",
     "./dist/js/main.js",
-    "./dist/js/home.js"
+    "./dist/js/blog.js",
+    "./dist/js/event.js"
   ],
   theme: {
     extend: {
